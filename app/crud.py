@@ -12,8 +12,16 @@ def get_accounts(db: Session):
     return db.query(models.Account).all()
 
 
-def get_user_by_id(db: Session, username: str):
-    return db.query(models.User).filter(models.User.username == username).all()
+def get_user_by_username(db: Session, username: str):
+    return db.query(models.User).filter(models.User.username == username).scalar()
+
+
+def get_account_by_email(db: Session, email: str):
+    return db.query(models.Account).filter(models.Account.email == email).scalar()
+
+
+def get_account_by_username(db: Session, username: str):
+    return db.query(models.Account).filter(models.Account.username == username).scalar()
 
 
 def create_account(db:Session, account: schemas.AccountCreate):
